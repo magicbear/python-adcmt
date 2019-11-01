@@ -22,5 +22,5 @@ if err != 0:
 
 print(buf)
 
-adcmt.close(hDev)
-adcmt.end()
+# adcmt.close(hDev)
+# adcmt.end()

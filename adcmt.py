@@ -70,6 +70,14 @@ def write(hDev, strCmd):
 def read(hDev, max_len = 256):
 	buf = ctypes.create_string_buffer(max_len)
 	pRead = ctypes.c_uint(0)
-	print(buf)
 	rc = ausb_read64(hDev, buf, max_len, pRead)
 	return (rc, buf[:pRead.value])
+
+def send(hDev, cmd):
+	ret = write(hDev, cmd)
+	if ret != 0:
+		raise Exception("SEND COMMAND ERROR")
+	ret, buf = read(hDev)
+	if ret != 0:
+		raise Exception("SEND COMMAND ERROR")
+	return buf
